@@ -1,0 +1,41 @@
+# By default, Nginx looks in the /usr/share/nginx/html directory inside of the container for files to serve.
+
+
+Objective:
+1- create a host directory
+2- create an index.html file inside this directory 
+3- run an nginx container and expose it using port  8080
+4- access the container from a browser
+
+-------------------------------------------
+
+$ pwd
+$ mkdir web-project
+$ cd web-project
+
+$ vim index.html
+- and put this code in it 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+</head>
+<body>
+	<h3>This project for who wants to learn docker</h3>
+  <h1>Hello from Course Docker Mastery</h1>
+  <p>Regards,</p>
+  <p>Khaled Abd-Elhay Hawil</p>
+  <a href="https://www.linkedin.com/in/khaledhawil/" target="_blank">Connect with Me</a>
+</body>
+</html>
+
+######## Run the container ############################33
+$ docker run -it -d -p 8080:80 -v ~/web-project:/usr/share/nginx/html   nginx 
+
+# >>>>> Access from browser localhot:8080
+- you can edit anything in index.html and save it and you will find these changes immediately
+# >>>>> Access agian from browser localhot:8080
+
+
+

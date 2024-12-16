@@ -1,0 +1,13 @@
+# to run docker-compose file 
+$ docker-compose up -d 
+
+
+# to down this file 
+
+$ docker-compose down
+
+
+ - to view the ps of docker-compose 
+
+$ docker-compose ps 
+

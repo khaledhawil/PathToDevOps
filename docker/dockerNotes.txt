@@ -1,0 +1,202 @@
+# Will talk about docker image 
+
+- from docker file Y can build it with $ docker build command  and push it to docker hub repo 
+- if Y want to ues this image  use $ docker pull image 
+- Docker image contain number of layers 
+
+
+- "build time" is when Y run docker run imageName # the time of creating container
+
+- "runtime" is after the container is running 
+
+- "image tag" is  the version of image 
+
+# to view the layers of any image use $ docker history imageName 
+
+- to build a new image from container use # docker commit  (containerID or name)  NameOfNewIamge:ImageTag
+
+- to log-in with docker hub with terminal use $ docker login -u YourUserName 
+
+
+#ex 1 for create new image from container  use docker commit 
+
+-1 # create centos container 
+$ docker run -it -d centos  
+-2 # exec the centos container  and create new files and dirs 
+$ docker exec -it containerName bash 
+$ mkdir any dirName and files 
+$ exit 
+
+-3 # create the new image from this container 
+$ docker commit containerID  ImageName 
+-4 list imames 
+$ docker images 
+
+5- to push the image to docker hub 
+# first give it a tag 
+$ docker tag   imageName  username/repoName:imageTag 
+then  push it 
+$ docker push repoName:imageTag 
+
+# Three steps tp create and push the image 
+$ docker commit serene_herschel  first-image:v2
+$ docker tag first-image:v2 khaledhawil/first-image:v2
+$ docker push khaledhawil/first-image:v2
+
+
+- to push image to private repo 
+
+docker push khaledhawil/privateRepo:v1
+
+
+
+##############################################
+############ Docker Volumes ##################
+############################################
+
+# list volumes 
+$   docker volume ls 
+# create docker volume
+$ docker volume  create new-volume
+
+# run container with new-volume 
+$ docker run -it -d --name cont1  -v new-volume:/cont1 centos
+
+# add another container to this volume 
+
+$ docker run -it -d --name cont2  -v new-volume:/cont2 centos
+
+# you can check cont dir in container 
+$  docker exec -it cont1  bash \ 
+ls
+
+# add container to this volume but read only 
+
+$ ocker run -it -d --name cont3 -v new-volume:/cont3:ro centos
+
+
+# list volume files on host machine 
+$ sudo ls  /var/lib/docker/volumes/new-volume/_data
+
+# delete the volume  but first make sure delete containers those assigned to this volume 
+$ docker volume  rm  new-volume 
+# Create new volume using dockerfile 
+Objective 
+
+1- Create  a new docker dile with a volume 
+2- Build a image from the dockerfile
+3- run a container from the image 
+4- make a change to the volume inside the container 
+5- access the volume from the host  and see the change made 
+############ steps #################
+1- 
+FROM ubuntu 
+VOLUMe /dockerfilevolume
+
+2- $ docker build --t vol . 
+3- $ docker images | grep vol 
+4- $ docker volume ls 
+5- $ docker run  -it -d --name dockerfilevolume vol
+6- $ docker exec -it  docker exec -it  dockerfilevolume  bash  
+7- $ docker inspect dockerfilevolume | grep -i volume 
+8- $ sudo cat  /var/lib/docker/volumes/0d6cb942a3be8c0f74058989d595e7ed39c1d4b03aa57459d7a54c6f7352e1ed/_data/file.txt
+9- $ docker rm dockerfilevolume  -f 
+10-$ docker volume  rm 0d6cb942a3be8c0f74058989d595e7ed39c1d4b03aa57459d7a54c6f7352e1ed 
+###########################################################################################################
+######################### How to share date between multiple containers ###################################
+############################################################################################################3
+- bind mounting 
+
+
+
+##################################################
+########## Demo Docker Bind Mounting  ############
+##################################################
+
+Objective:
+1- Create a new host directory
+2- run a first container with this host directory as a volume
+3- run a second container with the same volume 
+4- Access the file in the volume from the two containers
+5- Readonly Option
+6- Using a container as a shared data volume
+
+
+
+-v [host directory]:[container directory]
+
+# create a new directory 
+$ mkdir cont-data
+$ cd /cont-data
+$ echo "Hello from Host" >> host.txt 
+$ cd ..
+
+# run a first container with the volume 
+$ docker run -it -d --name cont1 -v /cont-data:/cont1 centos
+$ docker exec -it cont1 bash
+$ cd /cont1
+$ ls >>> you will find the files
+$ echo "Hello from cont1" >> cont1.txt 
+
+############## readonly ############
+
+# run a third with >>>>>>>> "readonly"
+$ docker run -it -d --name cont2 -v /cont-data:/cont2:ro centos
+$ docker exec -it cont2 bash
+$ cd /cont2
+$ touch 1.text # touch: cannot touch 'tes.text': Read-only file system
+
+
+$ docker run -it -d --name cont1  -v /home/ubuntu/cont-date:/con1 centos
+
+- attach cont2 to cont1 
+
+###### Sharing Data Between Multiple Docker Containers ######
+
+
+command:
+--volumes-from [name of container]
+--volumes-from [name of container]:ro
+
+
+$ docker run -it -d --name cont-storage -v /shared-data centos
+$ docker exec -it cont-storage bash
+# you will find a file named "shared-data" 
+$ cd /shared-data
+$ echo "This file is shared between containers" > cont-storage.txt 
+
+# run a second container
+$ docker run -it -d --name cont3 --volumes-from cont-storage centos
+$ docker exec -it cont3 bash
+$ cd /shared-data
+$ ls >>>>>>>> # you will find the same files 
+
+##### Readonly #####
+$ docker run -it -d --name cont --volumes-from cont-storage:ro centos
+$ docker exec -it cont4 bash
+$ cd /shared-data
+$ ls >>>>>>>> # you will find the same files 
+
+
+##############################################
+##################   End   ###################
+##############################################
+
+
+
+
+
+
+
+##################  COPY Files from container to the host ##############################
+-                con-name:Path-files-inCont   HostPath    
+$ docker    cp    nginx:/etc/nginx/nginx.conf  ./config
+
+- this is The opposite   from host  to container 
+
+$ docker cp         files/  nginx:/etc/hostluka
+
+
+
+- to read container logs 
+~$ docker logs -f naughty_elbakyan 

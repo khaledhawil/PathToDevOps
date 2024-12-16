@@ -1,0 +1,26 @@
+#1- select your image 
+FROM  ubuntu 
+#2- your work path
+WORKDIR app/
+
+# ENV لإعداد متغيرات البيئة.
+ENV dev=khaled 
+
+# نسخ الملفات إلى الصورة
+COPY requirements.txt /app/
+COPY . /app/
+
+# تثبيت المتطلبات اثناء التشغيل 
+# it installs during buildtime  
+RUN pip install --no-cache-dir -r requirements.txt
+# تحديد البورت
+EXPOSE 5000
+# المر الي هيشتغل بعد ما الكونتينر يقوم
+# this works on runtime 
+CMD ["python", "app.py"]
+
+- to build this dockerfile use $ dokcer build -t imageName . 
+
+
+# 
+ENTRYPOINT ["echo"]

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: nginx
+    container_name: crocodile
+    ports:
+      - 8080:80
+    volumes:
+      - /home/ubuntu/docker/compose:/user/share/nginx/html
+  frontend:
+    image: nginx
+    container_name: crocodile2
+    ports:
+      - 4000:80
+    volumes:
+      -  new-vol:/user/share/nginx/html
+volumes:
+  new-vol: {}

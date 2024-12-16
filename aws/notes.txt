@@ -1,0 +1,15 @@
+aws ec2 stop-instances i-0d126f203927452cb
+
+aws ec2 describe-instances --query "Reservations[*].Instances[*].{ID:InstanceId,State:State.Name,Name:Tags[?Key=='Name'].Value | [0]}" --output table
+aws ec2 stop-instances --instance-ids  i-0d126f203927452cb
+aws ec2 start-instances --instance-ids  i-0d126f203927452cb
+
+aws ec2 describe-instances  --instance-ids  i-0d126f203927452cb
+
+
+
+aws ec2 start-instances --instance-ids  i-013d965d92a95617c
+aws ec2 stop-instances    --instance-ids  i-013d965d92a95617c
+aws ec2 describe-instances  --instance-ids  i-013d965d92a95617c
+
+

@@ -1,0 +1,47 @@
+# learn anything website 
+>>>>>>>>This project for test and for anyone learn  docker or devops >>>>>>>>
+##          Description
+practice with docker using aws 
+##          Technologies Used
+- AWS [EC2,VPC,subnet,target Group,LoadBalancer,rout table, security group]
+- Docker [Dockerfile,nginx image,docker commands]
+- Docker Hub 
+----------------------------------------------------------------------------------------
+Objective:
+1- pull the project repo 
+2- move to project dir 
+3- create Dockerfile 
+4- build this dockerfile 
+5- run the image 
+6- create a commit from this container  # this will create a new image 
+7- login and push the new image to your dockerHub account 
+--------------------------------------------------------------------------------------------
+Path for the website: /Course-Docker/sample-website
+# Pull the project from github 
+$ git clone https://github.com/MenaMagdyHalem/Course-Docker.git
+$ pwd
+$ ls
+$ cd Course-Docker # and review files
+--------------------------------------------------------------------------------------------
+# Create a Dockerfile using vim 
+$ vim Dockerfile
+# Paste the below into the file
+FROM nginx:latest
+COPY ./Course-Docker/sample-website /usr/share/nginx/html/
+EXPOSE 80
+# Build the image from the Dockerfile and run it publishing port 2001 to be mapped to port 80 on the host
+$ docker build -t website .
+--------------------------------------------------------------------------------------------------
+$ docker images # to review new image
+$ docker run -it --rm -d -p 2001:80 --name web website
+# >> open in browser to test using port 2001 on the local host.
+# commit
+$ docker commit web khaledhawil/new-web
+## we need to login first ##
+$ docker login
+# push image to docker hub
+$ docker push khaledhawil/new-web # open the docker hub and review repo
+## pull it agian and run a new container 
+$ docker run -it --rm -d -p 2002:80 --name new-hub khaledhawil/new-web
+
+

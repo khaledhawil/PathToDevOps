@@ -1,0 +1,40 @@
+# here we wqill talk about Bash 
+- Git Commands 
+1- git add # ---> this adding files to stage Area , Its ready for commit 
+(use "git add <file>..." to update what will be committed)
+2- git commit -m "Your  commit"
+
+
+
+3- git restore --staged fileName #   (use "git restore --staged <file>..." to unstage)
+(use "git restore <file>..." to discard changes in working directory)
+
+
+
+4- git status ---> To see the status of Your Repository 
+
+- to create branch -
+$ git branch branchName
+- To delete branch
+$ git branch -d branchName # error: The branch 'push-fix' is not fully merged.
+If you are sure you want to delete it, run 'git branch -D push-fix'.
+
+# Ex 
+$ git branch developer # this to creat e the branch 
+$ git checkout developer  #  move to developer branch 
+
+
+ # view your repo logs 
+ -5 git log --->
+ $ git log --all
+$ git log --oneline
+6- to list your branches
+$ git branch 
+$ git branch --list 
+
+# how to merge  branches in git 
+
+- switch to the brach to merge it with the branch code 
+# Fast-forward
+$ git  merge branchname
+

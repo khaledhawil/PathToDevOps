@@ -1,0 +1,8 @@
+Nader    account   45000
+Sara     account   25000
+Mana     sales     50000
+Ali      account   47000
+Ahmed    sales     15000
+deena    sales     23000
+Sara     sales     13000
+sativa   HR        80001

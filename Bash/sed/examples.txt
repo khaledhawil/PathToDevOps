@@ -1,0 +1,18 @@
+# will use file.txt  with these Examples
+- replace  "dolfined" with dollar  generally in second  line  
+$ sed '2s/dolfined/dollar/g' file.txt 
+- replace  "dolfined" with Khaled  generally in second and third line 
+$ sed '2,3 s/dolfined/Khaled/g' file.txt 
+- replace  "dolfined" with Khaled  generally from third line to the end of lines 
+$ sed '3,$ s/dolfined/Khaled/g' file.txt 
+- replace  "dolfined" with Dolfined generally in beginning of the line only 
+$ sed 's/^dolfined/Dolfined/g' file.txt 
+- if you don't remember the spilling of the word U can add ... and sed will complete the word 
+$ sed 's/dolfi.../Dolfined/g' file.txt 
+- replace the last word in the line only 
+$ sed 's/center$/Kahled/g' file.txt
+- how to use file has contain sed commands with sed command 
+$ sed -f sed.txt file.txt 
+- If you want to edit the file directly, use the -i option
+$ sed -i '2,3 s/Dolfined/dolfined/g' file.txt  # this apply in specific lines 
+

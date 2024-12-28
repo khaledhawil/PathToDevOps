@@ -1,0 +1,164 @@
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+5. Conditional Expressions in Bash
+Using Regular Expressions in awk
+# Comparison  in Bash
+suppress Therefore
+- In Bash, 
+comparison can be performed using various operators for strings, integers, 
+and file attributes. Below are the common  types of comparisons and their syntax:
+
+# String Comparison
+- Equality:
+
+if [ "$string1" = "$string2" ]; then
+       echo "Strings are equal"
+   fi
+
+- Inequality:
+
+if [ "$string1" != "$string2" ]; then
+       echo "Strings are not equal"
+   fi
+-
+
+- String Length:
+
+if [ -z "$string" ]; then
+       echo "String is empty"
+   fi
+
+   if [ -n "$string" ]; then
+       echo "String is not empty!"
+   fi
+
+- Lexicographical Comparison:
+if [[ "$string1" < "$string2" ]]; then
+       echo "$string1 is less than $string2"
+   fi
+
+   if [[ "$string1" > "$string2" ]]; then
+       echo "$string1 is greater than $string2"
+fi
+
+- Integer Comparison
+Equality:
+if [ "$num1" -eq "$num2" ]; then
+       echo "Numbers are equal"
+   fi
+- Inequality 
+if [ "$num1" -ne "$num2" ]; then
+       echo "Numbers are not equal"
+   fi
+- Greater Than:
+
+if [ "$num1" -gt "$num2" ]; then
+       echo "$num1 is greater than $num2"
+fi
+
+- Less Than:
+if [ "$num1" -lt "$num2" ]; then
+       echo "$num1 is less than $num2"
+   fi
+
+
+- Greater Than or Equal To:
+if [ "$num1" -ge "$num2" ]; then
+       echo "$num1 is greater than or equal to $num2"
+   fi
+   .
+
+- Less Than or Equal To:
+
+if [ "$num1" -le "$num2" ]; then
+       echo "$num1 is less than or equal to $num2"
+   fi
+
+# File Comparison
+- Check if a file exists:
+
+if [ -e "$file" ]; then
+       echo "File exists"
+   fi
+
+
+- Check if a file is a regular file:
+if [ -f "$file" ]; then
+       echo "It's a regular file"
+fi
+
+- Check if a directory exists:
+if [ -d "$directory" ]; then
+       echo "It's a directory"
+fi
+
+
+- Check if a file is readable:
+
+if [ -r "$file" ]; then
+       echo "File is readable"
+fi
+
+
+- Check if a file is writable:
+if [ -w "$file" ]; then
+       echo "File is writable"
+fi
+
+
+- Check if a file is executable:
+if [ -x "$file" ]; then
+       echo "File is executable"
+fi
+
+
+# Example Script
+
+#!/bin/bash
+
+string1="hello"
+string2="world"
+num1=5
+num2=10
+file=/home/luka/Desktop/devOpsPath/bash/Notes.txt
+dir=/home/luka/Desktop/devOpsPath/bash
+# String comparison  
+if [ "$string1" != "$string2" ]; then
+    echo "Strings are not equal"
+fi
+
+# Integer comparison
+if [ "$num1" -lt "$num2" ]; then
+    echo "$num1 is less than $num2"
+
+    else:
+    echo "Is greater then"
+fi
+
+# File comparison
+if [ -e "$file" ];
+then
+    echo "$file exists"
+else
+    echo "$file does not exist"
+fi
+# directory comparison 
+if [ -d  "$file" ]; then
+    echo "$file exists"
+else
+    echo "$file does not exist"
+fi
+
+
+
+you can ussss khaleed haave vvwie witth theemm
+
+# 

@@ -1,0 +1,11 @@
+### Basic Usage of Variables in `awk` 
+- Some of the most common ones include:
+$0: Represents the entire current line.
+$1, $2, ...: Represents the first, second, etc., field (or column) of the current line.
+NR: The number of records (lines) processed so far.
+NF: The number of fields in the current record.
+$ echo -e "Alice 25\nBob 30\nCharlie 22" | awk '{print $1, "is", $2, "years old."}'
+Alice is 25 years old.
+Bob is 30 years old.
+Charlie is 22 years old.
+

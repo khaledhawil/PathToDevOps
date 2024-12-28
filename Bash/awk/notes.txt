@@ -1,0 +1,82 @@
+# What is awk?
+- awk is a command-line tool used for processing and analyzing text files, 
+especially structured data like CSV (Comma-Separated Values) files. 
+It allows you to search, manipulate, and format text easily.
+Basic Structure of an awk Command
+The basic syntax of an awk command is:
+$ awk 'pattern { action }' filename
+* pattern: This specifies the condition that must be met for the action to be performed.
+* action: This is what you want to do with the lines that match the pattern.
+* filename: This is the name of the file you want to process.
+- Common Uses of awk
+Print Specific Columns
+If you have a file with multiple columns and you want to print a specific column, 
+you can do it like this
+$ awk '{print $1}' filename
+This command prints the first column of each line. 
+$1 refers to the first column, 
+$2 refers to the second column, and so on.
+Print Lines Matching a Pattern
+- You can use awk to print lines that contain a specific word:
+$ awk '/pattern/ {print}' filename
+Replace pattern with the word you want to search for.
+
+- Perform Calculations
+awk can also perform calculations. 
+For example, 
+if you have a file with numbers and you want to sum them:
+$ awk '{sum += $1} END {print sum}' filename
+
+- Conditional Statements
+You can use conditions to perform actions based on the values:
+$ awk '$1 > 10 {print $1}' filename
+This command prints the first column only if the value is greater than 10.
+
+Example
+Let’s say you have a file called data.txt with the following content:
+Alice 25
+Bob 30
+Charlie 22
+$ awk '{print $1}' data.txt
+Output:
+Alice
+Bob
+Charlie
+To print names of people older than 25:
+$ awk '$2 > 25 {print $1}' file.txt 
+Output:
+Bob
+
+- If U want to count number of lines using awk :
+$ $ awk ' BEGIN {i=0} {i++} END {print i} ' file.txt 
+18
+$ wc -l file.txt 
+18 file.txt
+
+                    this wil print first ----      this print the file              this will print --- at the end 
+$ cat file.txt | awk 'BEGIN {print "-------------"}        {print}                 END {print "---------------"}'
+
+
+- file separator 
+ex on /etc/passwd 
+
+$ $ awk -F : ' BEGIN {FS=":"} {print $1}' pass.txt 
+the same command by another way 
+$ awk 'BEGIN {FS=":"} {print $1}' pass.txt 
+
+$ awk 'BEGIN {print "---------", FS=":"}         {print "UserName: ",$1,"-DefualtBash:" ,$7} END { print "---------"}' pass.txt 
+$ awk 'BEGIN {print "---------", FS=":",OFS="-"} {print "UserName",$1,"DefualtBash" ,$7} END { print "---------"}' pass.txt 
+$ awk 'BEGIN {print "---------", FS=":",OFS="-"} {print NR, "UserName",$1,"DefualtBash" ,$7} END { print "---------"}' pass.txt 
+$ awk 'BEGIN {RS=":"} {print} ' pass.txt # after : Start new line 
+$ awk 'BEGIN {RS=":";ORS="---"} {print} ' pass.txt 
+
+
+$ awk 'BEGIN {ORS="\n\n"} {print} ' pass.txt # هيطبع سطر وبعده سطر فاضي
+$ awk '/^A/ {print $1,$3}' tst.txt 
+
+
+$ awk ' $1 ~ /Sa/ {print $0}' tst.txt # search about felid number 1  $! ~ دي عشان يبحث في العمود الاول 
+$ awk ' $1 !~ /Sa/ {print $0}' tst.txt  # ودا عكس الي فوقه يعني حاتلي كل السطور الا الي انا محدده الي هو اول عمود 
+$ awk ' BEGIN { total=0 } {total+=$3} END {print "Total Salaries= ",total}' tst.txt #  How do you collect the salaries in the third column and print it ?
+
+$ awk ' BEGIN { total=0 ; total1=0} { total+=$3 ; total1=total/NR} END {print "Average Salaries= " , total1}' tst.txt # Total salaries divided by their number

@@ -1,0 +1,20 @@
+In Bash, a case statement is a control structure that allows you to execute different blocks of code
+ based on the value of a variable. 
+ It is often used as an alternative to multiple if-elif statements, 
+ especially when checking a variable against multiple possible values.
+
+
+
+* Syntax of a case Statement
+
+case variable in
+    pattern1)
+        # Commands to execute if variable matches pattern1
+        ;;
+    pattern2)
+        # Commands to execute if variable matches pattern2
+        ;;
+    *)
+        # Commands to execute if variable does not match any pattern
+        ;;
+esac

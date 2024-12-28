@@ -1,0 +1,108 @@
+# 1. Basic Regular Expressions in grep
+
+- Match a specific string:
+$ grep "pattern" filename
+
+- Search with a character  
+$  cat filename | grep .t # print the character t and the next of it 
+$  cat filename | grep t. # print the character t and the before of it 
+$ $ cat file.txt  | grep .t. # Prints the letter before and after it.
+$  cat filename | grep t..  # Print a "t" and two character after it 
+- Search with any cahracter 
+$ cat filename | grep a* # Print any  a character  
+- Match lines that start with a specific character:
+$ grep "^A" filename  # Lines starting with 'A'
+
+- Match lines that end with a specific character:
+$ grep "n$" filename  # Lines ending with 'B'
+- print the place that has double same character 
+
+$ cat file.txt  | grep -E s\{2}
+$ cat file.txt | grep -E  m\{2}
+cat file.txt | grep -E  e\{2} | grep -E t..
+
+$ cat file.txt | grep -E  a\+t
+
+
+
+- Match any digit:
+$ grep "[0-9]" filename  # Lines containing any digit
+
+- Match any character except a digit:
+$ grep "[^0-9]" filename  # Lines containing characters that are not digits
+
+
+# 2- Extended Regular Expressions in grep
+
+- You can use grep -E or egrep for extended regular expressions, 
+which allow more complex patterns without needing to escape special characters.
+- Match either of two patterns:
+
+$ grep -E "root|man" file.txt  # Lines containing either 'cat' or 'dog'
+
+
+- Match one or more occurrences of a pattern:
+
+grep -E "a+" filename  # Lines containing one or more 'a's
+
+
+* 3. Using Regular Expressions in sed **
+- $ sed is a stream editor that can also use regular expressions for text manipulation.
+
+- Substitute a pattern:
+$ sed 's/pattern/replacement/' filename
+
+
+- Delete lines matching a pattern:
+$ sed '/pattern/d' filename
+
+
+- Using extended regex in sed:
+$ sed -E 's/(pattern1|pattern2)/replacement/' filename
+
+
+- 4. Using Regular Expressions in awk
+awk is a powerful text processing tool that supports regular expressions.
+
+- Print lines matching a pattern:
+
+$ awk '/pattern/' filename
+
+
+- Using regex in conditions:
+ 
+awk '$1 ~ /^[A-Z]/' filename  # Print lines where the first field starts with an uppercase letter
+
+- 5. Conditional Expressions in Bash
+You can use regular expressions in conditional expressions within bash scripts.
+
+
+- Check if a string matches a regex:
+if [[ $string =~ ^[0-9]+$ ]]; then
+      echo "String is numeric"
+  fi
+
+
+# Bash Ex 
+#!/bin/bash
+
+# Example file
+echo -e "apple\nbanana\ncat\ndog\n1234" > fruits.txt
+
+# Using grep to find lines containing 'a'
+echo "Lines containing 'a':"
+grep "a" fruits.txt
+
+# Using sed to replace 'cat' with 'kitten'
+echo "Replacing 'cat' with 'kitten':"
+sed 's/cat/kitten/' fruits.txt
+
+# Using awk to print lines with more than 5 characters
+echo "Lines with more than 5 characters:"
+awk 'length($0) > 5' fruits.txt
+
+# Using regex in a conditional statement
+string="Hello123"
+if [[ $string =~ ^[A-Za-z0-9]+$ ]]; then
+    echo "'$string' contains only alphanumeric characters."
+fi

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx 
+  rules:
+  - host: LB-IC-808415089.us-east-1.elb.amazonaws.com
+    http:
+      paths:
+      - pathType: Prefix
+        path : /dolfined
+        backend:
+          service:
+            name: app1-svc
+            port:
+              number: 2000
+      - pathType: Prefix
+        path : /mena
+        backend:
+          service:
+            name: app2-svc
+            port:
+              number: 2500

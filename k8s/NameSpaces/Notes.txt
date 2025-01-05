@@ -1,0 +1,100 @@
+# NameSpaces in k8s 
+- A namespace is a way to divide cluster resources between multiple users.  
+- It is a way to partition a single k8s cluster into multiple virtual clusters.
+- It is a way to organize resources in a cluster.
+- It is a way to group resources together.
+- It is a way to isolate resources in a cluster.
+- It is a way to manage resources in a cluster.
+
+# how to create a namespace in k8s?
+```bash
+kubectl create namespace my-namespace
+```
+$ k create ns my-namespace
+
+# howq to set a specific ns to be default  k8s?
+```bash
+kubectl config set-context --current --namespace=my-namespace
+```
+3 to view the default namespace:
+```bash
+kubectl config view --minify | grep namespace:
+```
+
+# how to list all namespaces in k8s?
+```bash
+kubectl get namespaces
+k get ns 
+```
+# how to delete a namespace in k8s?
+```bash
+kubectl delete namespace my-namespace
+```
+$ k delete ns my-namespace
+
+# how to create a pod in a specific namespace?
+```bash
+kubectl create -f pod.yaml -n my-namespace
+```
+$ k create -f pod.yaml -n my-namespace
+
+# how to create a deployment in a specific namespace?
+```bash
+kubectl create -f deployment.yaml -n my-namespace
+
+$ k create -f deployment.yaml -n my-namespace
+```
+# how to create ns with yaml file
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-namespace
+```
+$ k create -f namespace.yaml
+```bash
+kubectl create -f namespace.yaml
+```
+
+# commands to help me when working with ns:
+```bash
+kubectl get namespaces
+kubectl get pods -n my-namespace
+kubectl get deployments -n my-namespace
+kubectl get services -n my-namespace
+kubectl get configmaps -n my-namespace
+kubectl get secrets -n my-namespace
+kubectl get pv -n my-namespace
+kubectl get pvc -n my-namespace
+kubectl get nodes
+kubectl get pods --all-namespaces
+kubectl get pods --all-namespaces -o wide
+kubectl get pods --all-namespaces -o wide --show-labels 
+kubectl get pods --all-namespaces -o wide --show-labels --sort-by=.metadata.name
+kubectl get pods --all-namespaces -o wide --show-labels --sort-by=.metadata.namespace
+kubectl get pods --all-namespaces -o wide --show-labels --sort-by=.metadata.creationTimestamp
+kubectl get pods --all-namespaces -o wide --show-labels --sort-by=.metadata.labels.app
+kubectl get pods --all-namespaces -o wide --show-labels --sort-by=.metadata.labels.app --selector=app=nginx
+kubectl describe pod my-pod -n my-namespace
+kubectl delete namespace my-namespace
+kubectl delete pod my-pod -n my-namespace
+```
+
+# why use ns with devops team ? 
+- to isolate resources between teams.
+- to manage resources between teams.
+- to organize resources between teams.
+- to group resources between teams.
+- to partition resources between teams.
+- to divide resources between teams.
+- to separate resources between teams.
+- to protect resources between teams.
+- to secure resources between teams.
+- to control resources between teams.
+- to restrict resources between teams.
+- to limit resources between teams.
+- to manage resources between teams.
+- to monitor resources between teams.
+- to audit resources between teams.
+- to track resources between teams.
+

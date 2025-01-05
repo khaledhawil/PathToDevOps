@@ -1,0 +1,163 @@
+No code was provided.
+# Here Will talk about POD in K8s 
+- Pod Commands
+- get pod or List of pods in k8s cluster and get the details of the pod 
+$ k get pod 
+$ k get pod -o wide
+$ k get pod -o yaml
+$ k get pod -o json
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}'
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {}
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {} | grep -i node
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {} | grep -i node | awk '{print $2}'
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {} | grep -i node | awk '{print $2}' | xargs -I {} k get node {}
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {} | grep -i node | awk '{print $2}' | xargs -I {} k get node {} -o wide
+$ k get pod -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP --no-headers | grep -i nginx | awk '{print $1}' | xargs -I {} k describe pod {} | grep -i node | awk '{print $2}' | xargs -I {} k get node {} -o yaml
+
+- Create a pod
+$ k run nginx --image=nginx --restart=Never
+$ k run nginx --image=nginx --restart=Never -o yaml --dry-run=client
+$ k run nginx --image=nginx --restart=Never -o yaml --dry-run=client > pod.yaml
+$ k apply -f pod.yaml
+$ k get pod
+$ k get pod -o wide
+$ k get pod -o yaml
+
+- Delete a pod
+$ k delete pod nginx
+$ k get pod
+$ k get pod -o wide
+$ k get pod -o yaml
+$ k delete pod nginx --force --grace-period=0
+
+
+- Create a pod with labels
+$ k run nginx --image=nginx --restart=Never --labels=app=nginx
+$ k get pod --show-labels
+$ k get pod --show-labels -o wide
+$ k get pod --show-labels -o yaml
+$ k get pod --show-labels -o json
+$ k get pod --show-labels -o custom-columns=POD_NAME:.metadata.name,POD_IP:.status.podIP,POD_LABELS:.metadata.labels
+
+- Create a pod with annotations
+$ k run nginx --image=nginx --restart=Never --annotations=app=nginx
+$ k get pod --show-labels
+$ k get pod --show-labels -o wide
+$ k get pod --show-labels -o yaml
+
+- Create a pod with namespace
+$ k run nginx --image=nginx --restart=Never --namespace=dev
+$ k get pod --show-labels
+
+- Create a pod with resource limits
+$ k run nginx --image=nginx --restart=Never --limits=cpu=200m,memory=512Mi
+$ k get pod --show-labels
+   
+
+- Create a pod with environment variables
+$ k run nginx --image=nginx --restart=Never --env="DB_HOST=mysql" 
+
+
+- Create a pod with command
+$ k run nginx --image=nginx --restart=Never --command -- sleep 3600
+
+
+
+- Create a pod with args
+
+$ k run nginx --image=nginx --restart=Never --command -- sleep 3600 -- 10
+$ k get pod --show-labels
+
+- Create a pod with service account
+$ k run nginx --image=nginx --restart=Never --serviceaccount=nginx-sa
+
+
+- Create a pod with volumes
+$ k run nginx --image=nginx --restart=Never --mount=type=volume,source=my-vol,target=/usr/share/nginx/html
+
+- Create a pod with secrets
+
+$ k create secret generic db-secret --from-literal=DB_HOST=mysql --from-literal=DB_USER=root --from-literal=DB_PASS=password
+
+$ k run nginx --image=nginx --restart=Never --env="DB_HOST
+
+- Create a pod with configmaps
+$ k create configmap db-config --from-literal=DB_HOST=mysql --from-literal=DB_USER
+$ k run nginx --image=nginx --restart=Never --env="DB_HOST=mysql" --
+
+- Create a pod with liveness probe
+$ k run nginx --image=nginx --restart=Never --liveness-probe=type=HTTPGet,httpGet.path=/,httpGet.port=80
+$ k get pod --show-labels
+
+- Create a pod with readiness probe
+
+$ k run nginx --image=nginx --restart=Never --readiness-probe=type=HTTPGet,httpGet.path=/,httpGet.port=80
+
+- Create a pod with startup probe
+$ k run nginx --image=nginx --restart=Never --startup-probe=type=HTTPGet,httpGet.path=/,httpGet.port=80
+
+- Create a pod with multiple containers
+
+$ k run nginx --image=nginx --restart=Never --dry-run=client -o yaml > pod.yaml
+$ k apply -f pod.yaml
+
+- Create a pod with init containers
+$ k run nginx --image=nginx --restart=Never --dry-run=client -o yaml > pod.yaml
+$ k apply -f pod.yaml
+
+- Create a pod with security context
+$ k run nginx --image=nginx --restart=Never --security-context=runAsUser=1000,runAsGroup=3000,fsGroup=2000
+$ k get pod --show-labels
+
+- Create a pod with node selector
+$ k run nginx --image=nginx --restart=Never --node-selector="disk=ssd"
+$ k get pod --show-labels
+
+- Create a pod with tolerations
+$ k run nginx --image=nginx --restart=Never --tolerations="key=value:NoSchedule"
+$ k get pod --show-labels
+
+- Create a pod with affinity
+$ k run nginx --image=nginx --restart=Never --affinity="nodeAffinity"
+$ k get pod --show-labels
+
+- Create a pod with priority class
+$ k run nginx --image=nginx --restart=Never --priority-class=high
+$ k get pod --show-labels
+
+- Create a pod with priority
+$ k run nginx --image=nginx --restart=Never --priority=1000
+$ k get pod --show-labels
+
+- Create a pod with pod affinity
+$ k run nginx --image=nginx --restart=Never --pod-affinity="podAffinity"
+$ k get pod --show-labels
+
+- Create a pod with pod anti-affinity
+$ k run nginx --image=nginx --restart=Never --pod-anti-affinity="podAntiAffinity"
+
+- Create a pod with pod disruption budget
+$ k run nginx --image=nginx --restart=Never --pod-disruption-budget=nginx-pdb
+$ k get pod --show-labels
+
+- Create a pod with pod security policy
+$ k run nginx --image=nginx --restart=Never --pod-security-policy=nginx-psp
+
+- Create a pod with pod template
+$ k run nginx --image=nginx --restart=Never --pod-template=nginx-pt
+
+- Create a pod with pod preset
+$ k run nginx --image=nginx --restart=Never --pod-preset=nginx-pp
+
+- Create a pod with pod disruption budget
+$ k run nginx --image=nginx --restart=Never --pod-disruption-budget=nginx-pdb
+
+- Create a pod with pod security policy
+$ k run nginx --image=nginx --restart=Never --pod-security-policy=nginx-psp
+
+- Create a pod with pod template
+$ k run nginx --image=nginx --restart=Never --pod-template=nginx-pt
+

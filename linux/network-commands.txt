@@ -1,0 +1,25 @@
+brctl show # show bridge interfaces in the bridge interface list */ \    
+
+$ brctl
+# show all bridge interfaces
+$ brctl show
+# show bridge interfaces in the bridge interface list
+$ brctl showmacs br0
+# show MAC addresses in the bridge interface list
+
+
+$ ethtool -S eth0 
+# show statistics for eth0 interface 
+$ ethtool
+# show all interfaces statistics
+$ ethtool -i eth0
+# show driver information for eth0 interface
+$ ethtool -p eth0
+# blink the LED on eth0 interface
+$ ethtool -t eth0
+
+
+$ tshark -V --color -i ens5 -d udp.port=80,vxlan -f "port 8472"
+
+
+$ iptables -n -t nat -L KUBE_SERVICE 

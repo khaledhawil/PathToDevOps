@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: dolfined 
+  labels:
+    env: prod 
+spec:
+  replicas: 5
+  selector: 
+    matchLables:
+  

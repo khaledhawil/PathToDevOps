@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dolfined
+  labels:
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dolfined
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 5
+      maxUnavailable: 2
+  template:
+    metadata:
+      labels:
+        app: dolfined
+    spec:
+      containers:
+      - name: dolfined
+        image: nginx
+        ports:
+        - containerPort: 80

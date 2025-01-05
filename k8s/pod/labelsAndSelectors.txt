@@ -1,0 +1,48 @@
+#
+-Labels and selectors in k8s # "object" here is any type of k8s resource object like pod, deployment, service, etc.
+  objects are used to identify and group objects. 
+  Labels are key-value pairs that are attached to objects. 
+  Selectors are used to filter objects based on labels.
+
+To fil them out in the following way:
+  metadata:
+    labels:
+      key1: value1
+      key2: value2
+      key3: value3
+- to filter them by command line:
+  kubectl get pods --selector key1=value1,key2=value2
+- Equality of labels:
+  kubectl get pods --selector key1=value1
+- Inequality of labels: 
+  kubectl get pods --selector key1!=value1
+- Set of labels:
+  kubectl get pods --selector 'key in (value1, value2)'
+- Not in set of labels:
+  kubectl get pods --selector 'key notin (value1, value2)'
+- Existence of labels:
+  kubectl get pods --selector 'key'
+- Absence of labels:
+  kubectl get pods --selector '!key'
+- AND operator:
+  kubectl get pods --selector 'key1=value1,key2=value2'
+
+# Commands that are used to add labels to the objects:
+- To add a label to a pod:
+  kubectl label pod <pod-name> <label-key>=<label-value>
+  Example:
+  kubectl label pod nginx app=nginx
+- To overwrite a label
+  kubectl label pod <pod-name> <label-key>=<label-value> --overwrite
+- To remove a label
+  kubectl label pod <pod-name> <label-key>-
+  Example:
+  kubectl label pod nginx app-
+
+- To add a label to a node:
+  kubectl label node <node-name> <label-key>=<label-value>
+- To add a label to a namespace:
+  kubectl label namespace <namespace-name> <label-key>=<label-value>
+
+- Equality of labels:
+  kubectl get pods -l key1=value1

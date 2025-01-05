@@ -1,0 +1,28 @@
+**********Kubernetes Interview Questions**********
+
+Beginner Level:
+
+1. What is Kubernetes? 
+
+2. What are the main components of Kubernetes?
+3. What is a Pod in Kubernetes? 
+4. What is a Replica Set?
+5. What is a Deployment? 
+6. How does Kubernetes handle container scaling?
+7. What is a Kubernetes Namespace?
+8. : How does Kubernetes handle service discovery and load balancing?
+9. What is the role of a Kubernetes Config Map?
+10. How can you expose a Kubernetes deployment to the outside world?
+
+Intermediate Level:
+
+1. What is a Stateful Set in Kubernetes?
+2. Explain the difference between a Deployment and a Stateful Set?
+3. How does Kubernetes handle storage for applications?
+4. What is a Daemon Set in Kubernetes?
+5. Explain the concept of a rolling update in Kubernetes?
+6. What are Kubernetes labels and selectors?
+7. What is a Kubernetes Operator?
+8. How can you perform rolling updates with zero downtime in Kubernetes?
+9. What is Kubernetes Helm?
+10. How does Kubernetes handle security and access control?

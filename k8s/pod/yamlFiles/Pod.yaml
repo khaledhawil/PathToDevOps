@@ -1,0 +1,33 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: demo
+  labels:
+    app: myapp
+spec:
+  volumes:
+    - name: emptydir-volume
+      emptyDir: {}
+    - name: nfs-volume
+      nfs:
+        server: 10.0.1.161
+        path: /mnt/shared
+  containers:
+    - name: main-container
+      image: nginx:apline 
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      volumeMounts:
+        - name: emptydir-volume
+          mountPath: /usr/share/nginx/html
+        - name: nfs-volume
+          mountPath: /mnt/nfs
+      ports:
+        - containerPort: 80
+      livenessProbe:
+        httpGet:

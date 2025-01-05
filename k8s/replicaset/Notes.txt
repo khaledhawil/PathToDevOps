@@ -1,0 +1,31 @@
+# ReplicaSet in K8s 
+# ReplicaSet is a higher level abstraction of Pods. It ensures that a specified number of pod replicas are running at any given time. 
+# It is a way to scale pods automatically.
+# It is a way to manage pods in a cluster.
+
+# how to create a replicaset in k8s? 
+- kubectl create -f replicaset-definition.yml
+
+# how to update a replicaset in k8s? 
+- kubectl replace -f replicaset-definition.yml
+
+# how to delete a replicaset in k8s? 
+- kubectl delete -f replicaset-definition.yml
+
+# how to get replicaset details in k8s?
+
+- kubectl get replicaset
+- kubectl describe replicaset myapp-replicaset
+- kubectl get replicaset -o yaml
+
+# how to scale a replicaset in k8s?
+- kubectl scale --replicas=6 -f replicaset-definition.yml
+- kubectl scale --replicas=6 replicaset myapp-replicaset
+- kubectl scale --replicas=6 replicaset myapp-replicaset --namespace=my
+
+
+
+
+# to show deploy yaml file by command ; 
+$  k create deploy  dodo --image nginx --replicas=5 --dry-run=client -o yaml # to show deploy yaml file by command 
+

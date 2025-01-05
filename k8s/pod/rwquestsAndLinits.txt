@@ -1,0 +1,28 @@
+# requests and limits in pod:
+What Are Requests and Limits?
+Requests: This is the minimum amount of resources (CPU and memory) that your container needs to run. 
+Kubernetes uses this information to decide where to place your Pod. 
+If a node doesn’t have enough resources to meet the request, your Pod won’t be scheduled there.
+
+Limits: This is the maximum amount of resources that your container can use.
+
+
+# - requests: 100m (100 miliseconds) = 0.1 CPU
+# - limits: 200m (200 miliseconds) = 0.2 CPU
+# - requests: 100Mi (100 Mebibytes) = 100 * 1024 * 1024 bytes
+# - limits: 200Mi (200 Mebibytes) = 200 * 1024 * 1024 bytes
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+    containers:
+    - name: nginx
+        image: nginx
+        resources:
+        requests:
+            memory: "100Mi"
+            cpu: "100m"
+        limits:
+            memory: "200Mi"
+            cpu: "200m" 

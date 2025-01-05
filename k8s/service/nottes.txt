@@ -1,0 +1,170 @@
+# service in k8s 
+
+- what is service in k8s? 
+the service in k8s is a way to expose an application running on a set of pods as a network service.
+- what are the types of services in k8s?
+1. ClusterIP
+2. NodePort
+3. LoadBalancer
+4. ExternalName
+
+- what is ClusterIP service?
+ClusterIP service is the default service type in k8s. It exposes the service on a cluster-internal IP.
+- what is NodePort service?
+NodePort service exposes the service on each Node’s IP at a static port.
+- what is LoadBalancer service?
+LoadBalancer service exposes the service externally using a cloud provider’s load balancer.
+
+# how to use each service type in k8s?
+- ClusterIP service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+    selector:
+        app: MyApp
+    ports:
+        - protocol: TCP
+        port: 80
+        targetPort: 9376
+```
+- NodePort service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+    selector:
+        app: MyApp
+    ports:
+        - protocol: TCP
+        port: 80
+        targetPort: 9376
+    type: NodePort
+```
+- LoadBalancer service:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+    selector:
+        app: MyApp
+    ports:
+        - protocol: TCP
+        port: 80
+        targetPort: 9376
+    type: LoadBalancer
+```
+# steps to create loadBalancer in aws :
+- create a target group and attach the ec2s to the target group
+- create a load balancer and attach the target group to the load balancer
+now you can access your application ULR by LoadBalancer url 
+
+
+
+
+# steps to create load balancer in aws and connect it with cluster :
+1. create a service with type LoadBalancer
+2. k8s will create a load balancer in aws
+3. the load balancer will forward the traffic to the pods in the cluster
+4. the load balancer will have a DNS name that can be used to access the service
+5. the load balancer will also have an IP address that can be used to access the service
+
+# commands for service in k8s 
+- create a service:
+```bash
+kubectl create -f service.yaml
+```
+- get services:
+```bash
+kubectl get services
+```
+- get service details:
+```bash
+kubectl describe service my-service
+```
+- delete a service:
+```bash
+kubectl delete service my-service
+```
+- expose a pod as a service:
+```bash
+kubectl expose pod my-pod --port=80 --target-port=9376 --name=my-service
+```
+- expose a pod as a service with type NodePort:
+```bash
+kubectl expose pod my-pod --port=80 --target-port=9376 --name=my-service --type=NodePort
+```
+- expose a pod as a service with type LoadBalancer:
+```bash
+kubectl expose pod my-pod --port=80 --target-port=9376 --name=my-service --type=LoadBalancer
+```
+
+- update a service:
+```bash
+kubectl apply -f service.yaml
+```
+
+
+
+
+
+
+
+TL;DR
+This is not the issue with the Service of type LoadBalancer but the mismatch between service.spec.selector value and deployment.spec.selector.matchLabels value.
+
+How you can fix your setup?
+To fix your setup you can use the same values from either Service or Deployment.
+
+Please choose only one of the following options:
+
+deployment.yaml changes:
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myappdeployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+        app: myapp # <-- CHANGES
+  template:
+    metadata:
+      labels:
+        app: myapp # <-- CHANGES
+    spec:
+      containers:
+        - name: myapp
+          image: pritishkapli/example:v1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+service.yaml changes:
+kind: Service
+apiVersion: v1
+metadata:
+  name: exampleservice
+spec:
+  selector:
+    app.kubernetes.io/name: myapp # <-- CHANGES
+  ports:
+    - protocol: "TCP"
+      # Port accessible inside cluster
+      port: 8081
+      # Port to forward to inside the pod
+      targetPort: 8080
+      # Port accessible outside cluster
+      nodePort: 30000
+  type: LoadBalancer

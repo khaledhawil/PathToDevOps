@@ -1,0 +1,79 @@
+# i Will start from where i left off 
+
+# لو عايز تعمل فولد جو فولد بنستخدم الامر mkdir -P 
+
+# Ex 1
+
+$ mkdir -P dir/dir1/dir-01/die02
+
+# عشان ابحث عن اي ملف في الجهاز بنستخدم امرين مهمين و هم  file and locate 
+
+# ex 1 with find 
+#       Path       type op file   "f for  file         name of file     *.txt for any file ends with .txt 
+$ find /home       -type          f                     -name             *.txt
+
+#                                d for directory                          dir's  name 
+$ find  /home        -type         d                    -name             aws 
+
+$ find  /home        -type         d                    -name             aws  | less   
+
+
+
+# ex 2
+#       . for  search here 
+$ find  .                             -type   f        - name *.log    
+
+
+$ cat $(find /home  -type f -name d??.log)
+
+
+# locate command 
+
+$ 
+
+
+# to list file by * or ? 
+$ ls file?
+$ ls file* 
+$ ls -lhd log* #  for list dirs 
+
+
+# xargs  this command to create dir from output 
+
+# ls file? | xargs -I {}  mkdir {}.d 
+
+
+# let's move to archive file  with tar command 
+# -c for archive   -f for name file  -v for info and -t for show the content of tarfile 
+ # ex 1 
+$ tar -cf log.tar  log/
+
+- to compress with tar command use -z 
+
+#           -v for more info - z for compress             the new file          path of dir you want to compress 
+$ sudo tar                           -czvf                            log.tar.gz              log/ 
+
+
+
+#                         -x for decompress  
+$ tar                           -xzvf                           log.tar.gz              log/ 
+
+# لو عايز افك الضغط بتاع ملف معين في فولدر تاني غير الي هو فيه 
+$ tar    -xzvf           log.tar.gz  -C /home/$USER
+# for show type of file 
+file  log.tar 
+- For compress file using gzip command  # zip fileName  
+$ gzip /log # this will replace the origan file with .gz 
+- to decompress use gzip -d filename 
+
+$ gzip /log
+
+- to create gz file without replace the origan file use -k 
+
+$ gzip -k file name # will create filename.gz from origan one 
+
+
+
+
+
+

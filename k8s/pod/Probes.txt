@@ -1,0 +1,38 @@
+#  Probes in  K8s: 
+
+
+# 1. Liveness Probe: 
+# - It is used to know if the container is alive or not.
+# - If the liveness probe fails, the container will be restarted.
+Example: 
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 3
+  periodSeconds: 5
+- path: /healthz
+is the path of the liveness probe.
+- port: 8080
+is the port of the liveness probe.
+- httpGet: 
+is used to if the is response from the server or not. 
+- initialDelaySeconds: 3
+is the time in seconds after the container has started before the probe is initiated.
+is used to wait for the container to be ready.
+- periodSeconds: 5
+is used to check the liveness probe every 5 seconds.
+- failureThreshold: 3
+is used to check the liveness probe 3 times before restarting the container.
+- timeoutSeconds: 5
+is used to wait for the liveness probe to respond in 5 seconds.
+- successThreshold: 1
+is used to check the liveness probe 1 time before considering it as successful.
+
+
+
+# 2. Readiness Probe: 
+- It is used to know if the container is ready to accept traffic.
+# Install Zsh and Oh-My-Zsh
+echo "Setting up Zsh and Oh-My-Zsh..."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

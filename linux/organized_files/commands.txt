@@ -1,0 +1,3 @@
+$ readlink -f Notes.txt* # -->  print absolute path of file 
+
+$ shuf -i 9999999-99999999 -n 2 # ---> create a random 8 digit 

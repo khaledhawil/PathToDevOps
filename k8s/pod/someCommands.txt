@@ -1,0 +1,31 @@
+
+
+- Describe the pod 
+$ k describe pod nginx
+$ k describe  po nginx  | grep Image
+
+- To edit the image of the pod you have to delete the pod and recreate it with the new image in the command.
+ $ k delete po nginx
+    $ k run nginx --image=nginx:1.17 --restart=Never
+
+-     To edit the image of the pod
+$ k edit po nginx 
+
+- To get the logs of the pod
+$ k logs nginx
+$ k logs -f nginx
+
+- If U want to update the image of the pod there two things to do:
+$ k edit po nginx  # and update the image of the pod
+- another thing to do:
+edit in a yaml file and update the image of the pod and apply the changes
+$ k apply -f pod.yaml
+output: pod/nginx configured
+- you can check the changes by:
+$ k describe po nginx  | grep Image
+- if the status of the pod is not running you can check the logs of the pod by:
+$ k logs nginx
+- if the status of the pod is "ErrImagePull" it means that the image is not found in the registry
+- if the status of the pod is "CrashLoopBackOff" it means that the pod is crashing and restarting again and again
+- to show the pods with labels:
+$ k get pods --show-labels

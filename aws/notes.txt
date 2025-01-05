@@ -12,4 +12,10 @@ aws ec2 start-instances --instance-ids  i-013d965d92a95617c
 aws ec2 stop-instances    --instance-ids  i-013d965d92a95617c
 aws ec2 describe-instances  --instance-ids  i-013d965d92a95617c
 
+https://hawil20.signin.aws.amazon.com/console
+admin
+AWS1642001aws
+
+UG_31187062@f-eng.tanta.edu.eg
+
 

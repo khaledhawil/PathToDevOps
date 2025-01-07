@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: no-schedule
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      gpu: dev
+  template:
+    metadata:
+      name: tolerations-pod
+      labels: 
+        gpu: dev
+    spec:
+      containers:
+      - name: tolerations-pod
+        image: nginx
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 200m
+            memory: 200Mi
+      tolerations:
+      - key: "gpu"
+        operator: "Equal"
+        value: "env"
+        effect: "NoSchedule"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefer-noschedule
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: regular-app
+  template:
+    metadata:
+      labels:
+        app: regular-app
+    spec:
+      containers:
+      - name: regular-container
+        image: nginx
+      tolerations:
+      - key: "gpu"
+        operator: "Equal"
+        value: "env"
+        effect: "PreferNoSchedule"
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: no-execute
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: regular-app
+  template:
+    metadata:
+      labels:
+        app: regular-app
+    spec:
+      containers:
+      - name: regular-container
+        image: nginx
+      tolerations:
+      - key: "gpu"
+        operator: "Equal"
+        value: "env"
+        effect: "NoExecute"

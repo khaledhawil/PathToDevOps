@@ -1,17 +1,3 @@
-# Taints and toleration work together  in k8s 
-
-## Taints 
-Definition: Taints are applied to nodes and allow a node to repel a set of pods.
-- Taints are key-value pairs that are applied to a node.
-- Taints are used to mark a node as not suitable for a particular type of workload.
-- Taints are used to prevent pods from being scheduled on a node.
-Purpose: They prevent pods from being scheduled on nodes unless the pod explicitly tolerates the taint.
-Usage: Taints are used to dedicate nodes to specific workloads, prevent certain workloads from being scheduled on specific nodes, or manage resources more effectively.
-
-**Effect: Specifies what happens to a pod that does not tolerate the taint. The effects can be:**
-- NoSchedule: Pods that do not tolerate the taint are not scheduled on the node.
-- PreferNoSchedule: Kubernetes Will try to avoid scheduling pods that do not tolerate the taint on the node, but it is not guaranteed.
-- NoExecute: Pods that do not tolerate the taint are evicted from the node if they are already running.
 
 # What are Taints and Tolerations?
 - **Taints:** These are like "badges" you put on a node (a server) to say, "Only certain pods (applications) can run here."
@@ -64,37 +50,6 @@ For example, you might want to keep heavy workloads off of smaller nodes.
 - **Resource Management**: It helps manage resources better by ensuring that only suitable pods run on certain nodes.
 That’s it! Taints and tolerations help you manage where your applications run in your Kubernetes cluster.
 
-Taints and tolerations are useful for several reasons:
-- **Resource Management:** You can use taints to manage resources on your nodes. For examp
-- **Security:** You can use taints to ensure that sensitive pods are not scheduled on nodes
-- **Maintenance:** You can use taints to prevent pods from running on nodes that are being
-- **Testing:** You can use taints to test how your pods behave when they are scheduled
-- **Scalability:** You can use taints to scale your cluster by adding or removing
-- **Performance:** You can use taints to optimize the performance of your cluster by adding or removing.
-- **Flexibility:** You can use taints to make your cluster more flexible 
-
-# Some commands that helpful with working with taints and tolerations:
-```bash
-kubectl taint node node1 key=value:NoSchedule # - adds a taint to
-kubectl taint node node1 key=value:NoSchedule- # - removes a taint
-kubectl describe node node1 # - shows the taints on a node
-kubectl describe pod my-pod # - shows the tolerations on a pod
-```
-
-***2. Remove a Taint from a Node***
-To remove a taint from a node, append a - to the taint key:
-```bash
-kubectl taint nodes <node-name> <key>:<effect>-
-```
-Example:
-```bash
-kubectl taint nodes node1 key1:NoSchedule-
-```
-***View All Nodes and Their Taints:***
-To view all nodes and their taints in a concise format, use
-```bash
-kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
-```
 
 # Taint Effects
 - When you apply a taint to a node, you specify an effect, which tells Kubernetes how to treat pods that do not have matching tolerations. Here are the three main effects:
@@ -119,3 +74,26 @@ What it means: Pods that are already running on the node and do not have a match
 - ***Example:***
  If you taint a node with key=value:Effect, it’s the same as tainting it with key=value:NoSchedule.
 
+
+# Some commands that helpful with working with taints and tolerations:
+```bash
+kubectl taint node node1 key=value:NoSchedule # - adds a taint to
+kubectl taint node node1 key=value:NoSchedule- # - removes a taint
+kubectl describe node node1 # - shows the taints on a node
+kubectl describe pod my-pod # - shows the tolerations on a pod
+```
+
+***2. Remove a Taint from a Node***
+To remove a taint from a node, append a - to the taint key:
+```bash
+kubectl taint nodes <node-name> <key>:<effect>-
+```
+Example:
+```bash
+kubectl taint nodes node1 key1:NoSchedule-
+```
+***View All Nodes and Their Taints:***
+To view all nodes and their taints in a concise format, use
+```bash
+kubectl get nodes -o jsonpath='{.items[*].spec.taints}'
+```

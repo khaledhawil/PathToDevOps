@@ -8,20 +8,14 @@ Definition: Taints are applied to nodes and allow a node to repel a set of pods.
 Purpose: They prevent pods from being scheduled on nodes unless the pod explicitly tolerates the taint.
 Usage: Taints are used to dedicate nodes to specific workloads, prevent certain workloads from being scheduled on specific nodes, or manage resources more effectively.
 
-**A taint consists of three components:**
-1.
-     Key: A string that identifies the taint.
-2.
-     Value: An optional string that provides additional information about the taint.
-3.
 **Effect: Specifies what happens to a pod that does not tolerate the taint. The effects can be:**
 - NoSchedule: Pods that do not tolerate the taint are not scheduled on the node.
 - PreferNoSchedule: Kubernetes Will try to avoid scheduling pods that do not tolerate the taint on the node, but it is not guaranteed.
 - NoExecute: Pods that do not tolerate the taint are evicted from the node if they are already running.
 
 # What are Taints and Tolerations?
-**Taints:** These are like "badges" you put on a node (a server) to say, "Only certain pods (applications) can run here."
-**Tolerations:** These are like "passes" that you give to pods to say, "I can go on nodes with these badges."
+- **Taints:** These are like "badges" you put on a node (a server) to say, "Only certain pods (applications) can run here."
+- **Tolerations:** These are like "passes" that you give to pods to say, "I can go on nodes with these badges."
 
 
 ## How to Use Them
@@ -64,9 +58,10 @@ kubectl describe pod my-pod
 
 ## Why Use Taints and Tolerations?
 
-**Control Scheduling**: You can control which pods run on which nodes. 
+- **Control Scheduling**: You can control which pods run on which nodes. 
 For example, you might want to keep heavy workloads off of smaller nodes.
-**Resource Management**: It helps manage resources better by ensuring that only suitable pods run on certain nodes.
+
+- **Resource Management**: It helps manage resources better by ensuring that only suitable pods run on certain nodes.
 That’s it! Taints and tolerations help you manage where your applications run in your Kubernetes cluster.
 
 Taints and tolerations are useful for several reasons:
@@ -119,7 +114,7 @@ What it means: Kubernetes will try to avoid scheduling pods without a matching t
 What it means: Pods that are already running on the node and do not have a matching toleration will be evicted (kicked out) from that node.
 - ***Example:***
  If you taint a node with key=value:NoExecute, any existing pods without a toleration for that taint will be removed from that node. New pods without tolerations won’t be scheduled there either. 
-***4-Effect:**
+**4-Effect:**
  What it means: This is the default effect if you don’t specify one. It’s equivalent to NoSchedule.
 - ***Example:***
  If you taint a node with key=value:Effect, it’s the same as tainting it with key=value:NoSchedule.

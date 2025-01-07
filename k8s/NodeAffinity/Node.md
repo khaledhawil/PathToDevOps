@@ -9,17 +9,17 @@ labels.
 # Types of Node Affinity
 - There are two types of node affinity:
 - **RequiredDuringSchedulingIgnoredDuringExecution:**
-- ***What it means:*** 
+    - ***What it means:*** 
 The pod must be scheduled on a node that meets the specified criteria. If no suitable nodes are available, the pod will not be scheduled.
-- ***Example:*** 
+    - ***Example:*** 
 If you require a pod to run only on nodes labeled with disktype=ssd, it will only be scheduled on those nodes.
 
 
 
 - **PreferredDuringSchedulingIgnoredDuringExecution:**
-- ***What it means:*** 
+    - ***What it means:*** 
 The pod prefers to be scheduled on nodes that meet the specified criteria, but it can still be scheduled on other nodes if necessary.
-- ***Example:*** 
+    - ***Example:*** 
 If you prefer to run a pod on nodes labeled with zone=us-west, it will be scheduled there if possible, but it can still run on other nodes if no suitable ones are available.
 
 # How to Use Node Affinity
@@ -98,4 +98,3 @@ spec:
  ```bash
  kubectl get nodes --show-labels
  ```
- 

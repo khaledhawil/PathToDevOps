@@ -7,18 +7,18 @@
 
 ## Key Points about Jobs:
 - Completion: A Job ensures that a specified number of pods successfully terminate. 
-     كام بود  الجوب تعملهم اثناء تشغيل الجو لحد ما تخلص 
-    If a pod fails, the Job controller will create a new pod to replace it until the desired number of successful completions is reached.
+   -  كام بود  الجوب تعملهم اثناء تشغيل الجو لحد ما تخلص 
+   - If a pod fails, the Job controller will create a new pod to replace it until the desired number of successful completions is reached.
 
 
 - Parallelism: You can run multiple pods in parallel by specifying the parallelism field, which determines how many pods can run at the same time.
-    كام بود يشتغلو ف نفس الواقت 
-   يعني لو الجوب متحددلها Completion=4   and Parallelism=2  
-   pods will run at the same time until they complete, then 2 more pods will run, and so on until all 4 pods are completed.
+  -  كام بود يشتغلو ف نفس الواقت 
+  - يعني لو الجوب متحددلها Completion=4   and Parallelism=2  
+  - pods will run at the same time until they complete, then 2 more pods will run, and so on until all 4 pods are completed.
 
 - Retry Mechanism: If a pod fails, the Job can automatically retry it based on the specified backoffLimit.
-    يعني لو الجوب متحددلها backoffLimit=3 
-    If a pod fails, the Job controller will wait for 10 seconds, then create a new pod and completed pod and so on until the backoffLimit is reached. 
+  -  يعني لو الجوب متحددلها backoffLimit=3 
+  -  If a pod fails, the Job controller will wait for 10 seconds, then create a new pod and completed pod and so on until the backoffLimit is reached. 
 
 ## How to Create a Job:
 Here’s a simple example of how to create a Job using YAML:

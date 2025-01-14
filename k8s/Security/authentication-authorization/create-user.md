@@ -77,3 +77,4 @@ kubectl get po --context=khaled
 output:
 Error from server (Forbidden): pods is forbidden: User "dolfined" cannot list resource "pods" in API group "" in the namespace "default"
 ```
+aouthontacation  aouthraisation 

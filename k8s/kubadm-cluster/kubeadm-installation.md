@@ -60,4 +60,17 @@ something like this:
 ```bash
 sudo YourToken
 ```
+- 6. on master node check if the worker nodes has joined:
+```bash
+kubectl get nodes
+```
 
+# To enable auto completion for kubectl commands and make  alias k:
+- put these lines in ~/.bashrc file 
+```bash
+# Kubectl autocomplete
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
+```
+# Thats it 

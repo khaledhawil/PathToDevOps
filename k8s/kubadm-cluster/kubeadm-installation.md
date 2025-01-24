@@ -66,7 +66,7 @@ kubectl get nodes
 ```
 
 # To enable auto completion for kubectl commands and make  alias k:
-- put these lines in ~/.bashrc file 
+- put these lines in `~/.bashrc` file 
 ```bash
 # Kubectl autocomplete
 source <(kubectl completion bash)
@@ -76,4 +76,3 @@ complete -F __start_kubectl k
 
 
 #  I hope this will help you. 
-@khaledhawil

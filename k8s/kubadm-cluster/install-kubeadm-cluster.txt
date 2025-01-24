@@ -11,4 +11,5 @@ by using the following  files:
 
 # Step 3: Initialize the kubeadm cluster on the master node
 follow the pdf file 
-```
+
+# You can install the kubeadm cluster on  vagrant vms or multipass vms 

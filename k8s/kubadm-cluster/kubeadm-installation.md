@@ -60,7 +60,7 @@ something like this:
 ```bash
 sudo YourToken
 ```
-- 6. on master node check if the worker nodes has joined:
+- 6. On the master node check if the worker nodes have joined
 ```bash
 kubectl get nodes
 ```

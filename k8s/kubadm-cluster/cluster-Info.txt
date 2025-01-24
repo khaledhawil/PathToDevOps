@@ -1,7 +1,0 @@
-- to enable auto completion for kubectl commands
-put these lines in bashrc file 
-# Kubectl autocomplete
-source <(kubectl completion bash)
-alias k=kubectl
-complete -F __start_kubectl k
-

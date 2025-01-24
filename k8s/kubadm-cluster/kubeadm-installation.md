@@ -73,4 +73,6 @@ source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
 ```
-# Thats it 
+
+
+#  I hope this will help you. 

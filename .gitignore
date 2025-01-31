@@ -2,3 +2,4 @@ iti.pem
 aw.pem
 k8s.pem
 *.pem
+*.pem*

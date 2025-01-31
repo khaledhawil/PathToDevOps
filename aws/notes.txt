@@ -1,10 +1,11 @@
 aws ec2 stop-instances i-0d126f203927452cb
 
 aws ec2 describe-instances --query "Reservations[*].Instances[*].{ID:InstanceId,State:State.Name,Name:Tags[?Key=='Name'].Value | [0]}" --output table
-aws ec2 stop-instances --instance-ids  i-0d126f203927452cb
-aws ec2 start-instances --instance-ids  i-0d126f203927452cb
+aws ec2 stop-instances --instance-ids  
+aws ec2 start-instances --instance-ids  
 
 aws ec2 describe-instances  --instance-ids  i-0d126f203927452cb
+
 
 
 
@@ -14,4 +15,16 @@ aws ec2 describe-instances  --instance-ids  i-013d965d92a95617c
 
 UG_31187062@f-eng.tanta.edu.eg
 
+Summary
+10 mins read
+Read through our summary to ensure you understand key concepts covered in this module!
 
+Introduction to AWS: AWS (Amazon Web Services) is a comprehensive cloud computing platform offering a wide range of services for storage, computing, networking, and more.
+What Cloud Computing Is: Cloud computing is the delivery of computing services over the internet, allowing for on-demand resource access, scalability, and cost efficiency.
+5 Characteristics of Cloud Computing: Cloud computing is characterized by on-demand self-service, broad network access, multi-tenancy and resource pooling, rapid elasticity and scalability, and measured service.
+Why We Should Use Cloud Computing: Cloud computing offers scalability, flexibility, cost savings, and the ability to focus on core business activities, making it an attractive choice for businesses.
+6 Advantages of Cloud Computing: Trade capital expenses for operational expenses, benefit from massive economies of scale, stop guessing capacity, increase speed and agility, stop spending money running and maintaining data centers, and go global in minutes.
+Deploying cloud computing: involves setting up and managing cloud-based resources to deliver computing services over the internet through public, private, and hybrid cloud platforms.
+Models of cloud computing: Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS), each offering different levels of control and management.
+AWS Global Infrastructure: Availability Zones, Regions, and AWS Data Centers are part of AWS's global infrastructure, providing high availability, low latency, and geographic diversity to support resilient and efficient cloud services.
+AWS pricing models: based on paying as you use services or data, saving when you reserve, paying less by using volume discounts AWS provides, and paying less as AWS infrastructure grows.

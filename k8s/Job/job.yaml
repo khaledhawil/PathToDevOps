@@ -57,3 +57,23 @@ spec:
         image: alpine
         command: ["sleep", "15"]
       restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: data-processing-job
+spec:
+  completions: 1
+  parallelism: 3
+  template:
+    spec:
+      containers:
+      - name: processor
+        image: busybox
+        command: ["sh", "-c", "echo 'Processing chunk $(MY_CHUNK)...' && sleep 20 && echo 'Chunk $(MY_CHUNK) processed.'"]
+        env:
+        - name: MY_CHUNK
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+      restartPolicy: Never    

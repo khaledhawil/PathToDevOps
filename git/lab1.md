@@ -82,3 +82,30 @@ git commit -m "Resolve merge conflict between master and experiment2"
 
 # View the commit history of the repository
 git log
+
+# delete commit history  only not changes of the repository:
+```bash
+git reset --soft HEAD~1
+```
+
+# delete commit history and changes of the repository:
+```bash
+git reset --hard HEAD~1
+```
+# to get file back after deleting it :
+```bash
+git checkout -- filename.txt
+git restore  filename # this will restore the file from trash
+```
+
+
+## Git Stash 
+This command is used to stash a commit history into the repository:
+```bash
+git stash
+git stash pop # 
+
+```
+This command is used to stash a commit history into the repository with a message:
+
+## 

@@ -38,6 +38,7 @@ apiVersion: apps/v1
 - kubectl create -f deployment-definition.yml
 
 # how to update a deployment in k8s?
+```bash
 - kubectl replace -f deployment-definition.yml
 - kubectl apply -f deployment-definition.yml
 - kubectl set image deployment/my-app my-app-container=my-app-image:latest
@@ -47,43 +48,64 @@ apiVersion: apps/v1
 - kubectl rollout undo deployment/my-app --to-revision=1
 - kubectl rollout pause deployment/my-app
 - kubectl rollout resume deployment/my-app
-
+```
 # to update the deployment image in k8s using sed command:
+```bash
 - sed -i 's/image: my-app-image:latest/image: my-app-image:latest/g' deployment.yaml
 sed -i 's|image: ubuntu|image: nginx|' deployment.yaml
-
+```
 # update pod image : 
+```bash
 - kubectl set image deployment/my-app my-app-container=my-app-image:latest --record=true # 
 - kubectl rollout status deployment/my-app
+```
 # how to scal the deployment :
+```bash
+
 - kubectl scale deployment/my-app --replicas=4
+```
+
 # to undo the update and back to last update :
+```bash
 - kubectl rollout undo deployment/my-app --to-revision=1
+```
 
 # to view thw history of rollout
+```bash
+
 - kubectl rollout history deployment/my-app
-
+```
 # to pause the rollout :
-- kubectl rollout pause deployment/my-app
+```bash
 
+- kubectl rollout pause deployment/my-app
+```
 
 
 
 
 # how to delete a deployment in k8s?
+```bash
+
 - kubectl delete -f deployment-definition.yml
 - kubectl delete deployment my-app
+```
+
 
 # how to get deployment details in k8s?
+```bash
 - kubectl get deployment
 - kubectl describe deployment my-app
 - kubectl get deployment -o yaml
-
+```
 # how to replace an image to deployment by imperative way :
+```bash
+
 - kubectl set image deployment/my-app my-app-container=my-app-image:latest #
 # examlpe
 - kubectl set image deployment/my-app my-app-container=my-app-image:latest --record
 kubectl set image deployment/<deployment-name> <container-name>=<new-image>
+```
 
 
 # how to create service for deployment:

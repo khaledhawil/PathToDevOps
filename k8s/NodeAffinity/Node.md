@@ -98,3 +98,16 @@ spec:
  ```bash
  kubectl get nodes --show-labels
  ```
+
+
+
+
+
+
+
+
+
+
+docker images names:
+polinux/stress
+

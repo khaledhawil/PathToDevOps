@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: joker
+  namespace: default
+spec:
+  schedule: "*/1 * * * *"  # This runs the job every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-container
+            image: busybox
+            command: ["echo", "Hello, Kubernetes CronJob!"]
+          restartPolicy: Never  # Restart the job on failure.
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: joker
+  namespace: default
+spec:
+  schedule: "*/1 * * * *"  # This runs the job every minute
+  successfulJobsHistoryLimit: 0 # Keep only the last 0 successful jobs.
+  failedJobsHistoryLimit: 1 # Keep the last 1 failed jobs.
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-container
+            image: busybox
+            command: ["echo", "Hello, Kubernetes CronJob!"]
+          restartPolicy: Never  # Restart the job on failure.

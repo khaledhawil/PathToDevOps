@@ -1,0 +1,43 @@
+# - name: create some users using variables 
+#   hosts: node1
+#   vars:
+#     user1: sara
+#     user2: john
+#     user3: alice
+#   tasks:
+#     - name: creating user {{user1}} and {{user2}} and {{user3}}
+#       user: 
+#         name: "{{user1}}"
+#         state: present
+#         shell: /bin/bash
+#     - name: create user {{user2}}
+#       user: 
+#         name: "{{user2}}"
+#         state: present
+#         shell: /bin/bash
+#     - name: create user {{user3}}
+#       user: 
+#         name: "{{user3}}"
+#         state: present
+#         shell: /bin/bash
+---
+- name: Creating users by using array syntax
+  hosts: node2
+  vars:
+    user: 
+      name: hamed
+      group: sudo 
+      uid: 2004
+      shell: /bin/bash
+      home: /home/hamed
+      password: "$6$Hap75oC3eB2CEa9W$.eqionELCnjEyckOMOVJp8qYaTJ8..Sv.RS8iifl2duTNAnY5.CzGuhUafpeXx0AqtCnWmowezNSJEmTafwpI1"
+  tasks:
+    - name: Create user with array syntax
+      user: 
+        name: "{{user['name']}}" 
+        group: "{{user['group']}}"
+        state: present
+        shell: "{{user['shell']}}"
+        uid: "{{user['uid']}}"
+        password: "{{user['password']}}"
+

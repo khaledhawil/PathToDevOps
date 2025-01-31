@@ -1,0 +1,24 @@
+- name: First playbook
+  hosts: nodes
+  gather_facts: true # 
+  become: true
+  become_method: ansible.builtin.sudo
+  tasks:
+    - name: Print some host info 
+      ansible.builtin.debug: # this module using to print anything U need 
+        msg: "The Hostname is {{  ansible_hostname }} and it is running {{ ansible_distribution}} and the Os is {{ ansible_distribution_version }}" # 
+    - name: Update the packages to the latest version 
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu" # this module o tell ansible to update if the distro is ubuntu not anything else
+    - name: Update the packages to the latest version 
+      ansible.builtin.yum:
+        name: "*"
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "RedHat" # this module o tell ansible to update if the distro is ubuntu not anything else
+ 
+---
+# name: Second playbook

@@ -1,0 +1,34 @@
+---
+# - name: this play to create user 
+#   hosts: node2
+#   tasks:
+#     - name: Creating user Khaled
+#       user:  
+#         name: khaled
+#         uid: 2001
+#         state: present
+- name: Add the user 'Mesho' with a bash shell, appending the group 'admins' and 'developers' to the user's groups
+  hosts: node1
+  tasks:
+  - name: mesho
+    user:
+      name: mesho
+      uid: 2003
+      state: present
+      shell: /bin/bash
+      # groups: sudo,spider
+      # append: yes # 
+  - name: Create file and give it some permissions to mesho user
+    file:
+      path: /home/mesho/info.txt
+      state: touch
+      owner: mesho
+      group: mesho
+      mode: 0644
+- name: Second playbook in the same file
+  hosts: all 
+  tasks:
+  - name: install nginx on all hosts
+    apt:
+      name: nginx
+      state: present

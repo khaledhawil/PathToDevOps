@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/data
+
+--- 
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: my-pv 
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:  # Type of The Pv 
+    path: "/home/ubuntu/my-pc"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim 
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  nodeName: master
+  containers:
+  - name: my-container
+    image: nginx
+    env:
+    - name: CON_NAME
+      valueFrom:
+        fieldRef:
+          fieldPath: metadata.name
+    volumeMounts:
+    - mountPath: /data/host-volume       # Where to access the data inside the container
+      name: my-hostpath      # Name of the volume must match the name of Volume created below
+  volumes:
+  - name: my-hostpath
+    hostPath:
+      path: /home/ubuntu/volume     # Path on the host machine (must exist)
+      type: Directory        # Type of the hostPath (optional)

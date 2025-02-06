@@ -1,0 +1,50 @@
+   1  passwd 
+    2  passwd  vagrant 
+    3  cd
+    4  fdisk -l /dev/sdb
+    5  fdisk /dev/sdb
+    6  fdisk /dev/sdb
+    7  fdisk -l 
+    8  mount /dev/sdb /data1/
+    9  mount /dev/sdb2  /data1/
+   10  df -h 
+   11  blkid
+   12  nano /etc/fstab 
+   13  vi /etc/fstab 
+   14  cat /etc/fstab
+   15  systemctl daemon-reload
+   16  df -h 
+   17  reboot
+   18  cd 
+   19  ll /
+   20  ll /root/
+   21  cp /etc/passwd /data1/
+   22  cat /data1/passwd 
+   23  dd if=/dev/zero of=/dev/sdb  bs=512  count=1
+   24  df -h 
+   25  fdisk  /dev/sdb
+   26  lsblk -l 
+   27  fdisk -l 
+   28  fdisk  /dev/sdb
+   29  ll /data1/
+   30  umount /data1 
+   31  ll /data1/
+   32  partprobe  /dev/sdb
+   33  partprobe  /dev/sdb
+   34  fdisk  /dev/sdb
+   35  vi /etc/fstab 
+   36  reboot
+   37  cd
+   38  fdisk /dev/sdb 
+   39  lsblk  /dev/sdb
+   40  lsblk  /dev/sdb -l 
+   41  dd if=/root/mbr  of=/dev/sdb  bs=512  count=1
+   42  lsblk  /dev/sdb
+   43  ls /dev/sdb
+   44  mount /dev/sdb1 /data1/
+   45  mount /dev/sdb2 /data1/
+   46  lsblk 
+   47  ll /data1/
+   48  vi /etc/fstab 
+   49  reboot 
+   50  history 

@@ -1,0 +1,43 @@
+1-preparep physical disks
+	#fdisk   create PT      change type LVM
+
+2- create pyhsical volume    pvcreate    /dev/sdc1  /dec/sdd  display          pvdisplay, pvs
+ 
+3- Create Volume group      vgcreate     testvg       /dev/sdc1 /dev/sdd      ,display vgdisplay,vgs
+
+4- create Logical volumes   lvcreate            -n lv1   -L 20G      testvg    ,display lvdisplay ,lvs
+
+5- create Filesystem  ext4  mkfs -t ext4   /dev/mapper/testvg-lv1
+
+6- mount logical    volume   mount    dev     mountpoint
+                         mount /dev/mapper/testvg-lv1    /mnt/datalv1/
+7- presistent mount    /etc/fstab
+
+UUID=4900a4ed-8039-4b62-babb-105b0a5d036c  /mnt/datalv1          ext4	   defaults        0 0
+
+#############################################
+Extend Logical volume
+      lvextend -L +30G /dev/testvg/lv1
+
+resize FS (ext4)
+
+      resize2fs   /dev/testvg/lv1
+#####################################################
+
+etxend and resize in one step (lvextend   -r   -L +10G /dev/testvg/lv1 )
+
+###########################################
+LV Reduce  lvreduce    -r   -L -20G     /dev/testvg/lv1
+########################################################
+Extend Volume group
+
+1- create physical volume on new hd      pvcreate /dev/sde
+2- extend volume group                   vgextend   testvg     /dev/sde
+##########################################################
+Reduce Voulme Group
+ you want to remove    sdc1
+  
+pvmove /dev/sdc1
+vgreduce testvg /dev/sdc1
+
+

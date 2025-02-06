@@ -28,3 +28,26 @@ Deploying cloud computing: involves setting up and managing cloud-based resource
 Models of cloud computing: Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS), each offering different levels of control and management.
 AWS Global Infrastructure: Availability Zones, Regions, and AWS Data Centers are part of AWS's global infrastructure, providing high availability, low latency, and geographic diversity to support resilient and efficient cloud services.
 AWS pricing models: based on paying as you use services or data, saving when you reserve, paying less by using volume discounts AWS provides, and paying less as AWS infrastructure grows.
+
+
+
+
+
+
+
+
+
+· From 6 months to 1 year of hands-on cloud administrator experience (Linux/Unix) in an internet-focused production environment (or related experience with gradually increasing responsibilities
+
+· Experience with Linux Based Operating systems (CentOS, Redhat, and Ubuntu) Linux administration
+
+· Strong experience with using AWS (EC2, EKS, ECS, S3, Route 53, Elastic Cache, Elasticsearch, RDS, SQS, SNS, and others) and experience implementing standard methodologies
+
+· An understanding of writing Infrastructure-as-Code (IaC), using tools like Cloud Formation or Terraform.
+
+· Knowledge of IP networking, VPNs, DNS, load balancing, and firewalling.
+
+
+
+
+

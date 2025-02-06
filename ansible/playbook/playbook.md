@@ -96,4 +96,4 @@ ansible-playbook play.yaml
 - 5. check if user created
 ```bash
 ansible node2 -m user -a "name=hamed"
-```
+``` 

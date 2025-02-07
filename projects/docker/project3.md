@@ -1,6 +1,5 @@
-###################################################
-############### Dockerized Flask App ##############
-###################################################
+
+# Dockerized Flask App 
 
 ## Description
 This project is a simple **Flask** web application integrated with **Redis** for counting page visits.
@@ -174,5 +173,4 @@ Building a Flask app with Docker.
 Using Redis for caching.
 Updating the application with and without rebuilding images.
 Efficient development using bind mount volumes.
-###################################################
 

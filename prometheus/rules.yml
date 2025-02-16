@@ -1,0 +1,28 @@
+groups:
+  - name:  node_exporter
+    rules:
+      - record: Node01_status
+        expr:   up{job="Node01"}
+      - alert: Node01_down
+        expr: Node01_status == 0
+        for: 40s
+  - name: free_memory
+    rules:
+      - record: free_memory
+        expr: node_memory_MemAvailable_bytes / 1024 / 1024
+---
+groups:
+  - name: cpu_alerts
+    rules:
+      - alert: HighCPULoad
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 40
+        annotations:
+          summary: High CPU Load detected on {{ $labels.instance }}
+          description: The CPU load is over 40% on {{ $labels.instance }} for the last 5 minutes.
+---
+global:
+route:
+  reciver: 'slack'
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 15s

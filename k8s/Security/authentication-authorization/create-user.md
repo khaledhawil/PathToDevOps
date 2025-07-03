@@ -3,8 +3,7 @@
 #####################################################################################
 ## see the contexts of config file
 ```bash
-kubectl config get-contexts
-```
+kubectl config get-contexts > contexts.log
 
 #### check kubeConfig file:
 ```bash

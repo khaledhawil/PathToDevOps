@@ -3,3 +3,8 @@ aw.pem
 k8s.pem
 *.pem
 *.pem*
+pem*
+.pem*
+*terraform*
+*.tfstate
+*.tfstate.*

@@ -1,0 +1,9 @@
+for: Om
+labels:
+severity: critical
+namespace: monitoring
+annotations:
+summary: “High CPU usage detected for pod {{ $labels.pod }}"
+description: “CPU usage for pod {{ $labels.pod }} is higher than 50% for more than 1 minute.
+
+expr: sum(rate(container_cpu_usage_seconds_total{image!="",container_name!="POD"}[5m])) by (pod) > 0.4
